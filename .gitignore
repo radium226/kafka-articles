@@ -1,7 +1,7 @@
 *.class
 *.log
 
-# sbt specific
+# SBT
 .cache/
 .history/
 .lib/
@@ -12,7 +12,10 @@ src_managed/
 project/boot/
 project/plugins/project/
 
-# Scala-IDE specific
+# IDE
 .scala_dependencies
 .worksheet
 .idea
+
+# Project
+/confluent/
