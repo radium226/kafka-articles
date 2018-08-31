@@ -1,0 +1,33 @@
+.PHONY: clone
+	echo "TOTO"
+
+.PHONY: checkout
+checkout: clone
+	cd "./confluent/kafka" && \
+	git checkout "2.0"
+
+	cd "./confluent/common" && \
+	git checkout "5.0.x"
+
+	cd "./confluent/rest-utils" && \
+	git checkout "5.0.x"
+
+	cd "./confluent/rest-utils" && \
+	git checkout "5.0.x"
+
+.PHONY: install
+install:
+	#cd "./confluent/kafka" && \
+	#gradle clean installAll
+
+	#cd "./confluent/common" && \
+	#mvn -DskipTests clean install
+
+	cd "./confluent/rest-utils" && \
+	mvn -DskipTests clean install
+
+	cd "./confluent/schema-registry" && \
+	mvn -DskipTests clean install
+
+.PHONY: build
+build: checkout install

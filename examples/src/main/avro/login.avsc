@@ -1,0 +1,15 @@
+{
+    "namespace": "event",
+    "type": "record",
+    "name": "Login",
+    "fields": [
+        {
+            "name": "customerId",
+            "type": "string"
+        },
+        {
+            "name": "epoch",
+            "type" : "long"
+        }
+    ]
+}

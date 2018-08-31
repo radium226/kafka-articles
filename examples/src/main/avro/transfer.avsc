@@ -1,0 +1,19 @@
+{
+    "namespace": "event",
+    "type": "record",
+    "name": "Transfer",
+    "fields": [
+        {
+            "name": "fromAccountId",
+            "type": "string"
+        },
+        {
+            "name": "toAccountId",
+            "type" : "string"
+        },
+        {
+            "name": "amount",
+            "type" : "long"
+        }
+    ]
+}

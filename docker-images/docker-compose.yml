@@ -1,0 +1,43 @@
+version: "3"
+services:
+  zookeeper:
+    image: "akka-kafka-confluent-examples/zookeeper"
+    build: "./zookeeper"
+    environment:
+      #LOG_LEVEL: "INFO"
+      MY_ID: 1
+    ports:
+    - 2181:2181
+
+  kafka:
+    image: "akka-kafka-confluent-examples/kafka"
+    build: "./kafka"
+    environment:
+      ZOOKEEPER_CONNECT: "zookeeper:2181"
+      SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      #LOG_LEVEL: "INFO"
+    ports:
+    - 9092:9092
+    depends_on:
+    - "zookeeper"
+
+  schema-registry:
+    image: "akka-kafka-confluent-examples/schema-registry"
+    build: "./schema-registry"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+    ports:
+    - 8081:8081
+    depends_on:
+    - "kafka"
+
+  examples:
+    image: "akka-kafka-confluent-examples/examples"
+    build: "./examples"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+      SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+    depends_on:
+    - "kafka"
